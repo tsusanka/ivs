@@ -1,14 +1,57 @@
 import numpy as np
 import cv2
+import sys
 
-img = cv2.imread('red_balls.png')
-img2 = cv2.medianBlur(img, 5)
-ret, th3 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
-hsv2 = cv2.cvtColor(th3, cv2.COLOR_RGB2GRAY)
+iLowH = 170;
+iHighH = 179;
 
-erode = cv2.erode(hsv2, None, iterations = 3)
-dilate = cv2.dilate(erode, None, iterations = 10)
+iLowS = 150; 
+iHighS = 255;
+
+iLowV = 60;
+iHighV = 255;
+
+
+# TA MRDKA JE V BGR
+lower_blue = np.array([95,250,130])
+upper_blue = np.array([105,255,255])
+
+img = cv2.imread('balls_susi.jpg')
+# ret, th3 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+cv2.imshow('hsv', hsv)
+
+
+#ranged_img = cv2.inRange(img, np.array([iLowH, iLowS, iLowV]), np.array([iHighH, iHighS, iHighV]))
+ranged_img = cv2.inRange(hsv, lower_blue, upper_blue)
+
+res = cv2.bitwise_and(img,img, mask= ranged_img)
+
+
+
+oMoments = cv2.moments(ranged_img);
+
+print oMoments
+dM01 = oMoments['m01'];
+dM10 = oMoments['m10'];
+dArea = oMoments['m00'];
+
+posX = dM10 / dArea;
+posY = dM01 / dArea;  
+
+print posX
+print posY
+
+cv2.line(ranged_img, (0,0), (int(posX), int(posY)), (255,50,0),5)
+cv2.imshow('ranged', ranged_img)
+cv2.imshow('res', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+sys.exit(0)
+
+
+#erode = cv2.erode(hsv2, None, iterations = 3)
+#dilate = cv2.dilate(erode, None, iterations = 10)
 contours,hierarchy = cv2.findContours(erode, cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 
 f = cv2.imread('red_balls.png')
