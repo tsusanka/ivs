@@ -13,6 +13,7 @@ for color in colors:
 	img_copy = img.copy()
 	draw_contours(img_copy, contours)
 	cv2.imshow(color[2], img_copy)
+	print('{0} {1} objects'.format(len(contours), color[2]))
 
 cv2.waitKey(0)
 sys.exit(0)
