@@ -23,19 +23,30 @@ dilate = cv2.dilate(erode, None, iterations = 10)
 
 # HougsCircles don't like to work with filled cicles. Canny does the job.
 canny = cv2.Canny(dilate, 200, 300)
-circles = cv2.HoughCircles(canny,cv2.cv.CV_HOUGH_GRADIENT,1,50,
-                            param1=50,param2=30,minRadius=0,maxRadius=0)
+# circles = cv2.HoughCircles(canny,cv2.cv.CV_HOUGH_GRADIENT,1,50,
+#                             param1=50,param2=30,minRadius=0,maxRadius=0)
 
-print(circles)
-if (circles is not None):
-	circles = np.uint16(np.around(circles))
-	print(circles)
+# print(circles)
+# if (circles is not None):
+# 	circles = np.uint16(np.around(circles))
+# 	print(circles)
 
-	for i in circles[0,:]:
-	    # draw the outer circle
-	    cv2.circle(img,(i[0],i[1]),i[2],(0,255,0),2)
-	    # draw the center of the circle
-	    cv2.circle(img,(i[0],i[1]),2,(0,0,255),3)
+# 	for i in circles[0,:]:
+# 	    # draw the outer circle
+# 	    cv2.circle(img,(i[0],i[1]),i[2],(0,255,0),2)
+# 	    # draw the center of the circle
+# 	    cv2.circle(img,(i[0],i[1]),2,(0,0,255),3)
+
+
+# find the contours in the mask
+# test using canny instead of dilate image
+(cnts, _) = cv2.findContours(dilate.copy(), cv2.RETR_EXTERNAL,
+	cv2.CHAIN_APPROX_SIMPLE)
+print "I found %d blue shapes" % (len(cnts))
+
+for c in cnts:
+	# draw the contour and show it
+	cv2.drawContours(img, [c], -1, (0, 255, 0), 2)
 
 #cv2.imshow('hsv', hsv)
 cv2.imshow('ranged', ranged_img)
