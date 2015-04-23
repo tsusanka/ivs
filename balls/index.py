@@ -1,7 +1,9 @@
+
 import numpy as np
 import cv2
 import sys
 from pre_processing import *
+from speech import *
 
 img = cv2.imread('color_balls4.jpg')
 
@@ -13,7 +15,10 @@ for color in colors:
 	img_copy = img.copy()
 	draw_contours(img_copy, contours)
 	cv2.imshow(color[2], img_copy)
-	print('{0} {1} objects'.format(len(contours), color[2]))
+
+	# sayISee(Shape.TRIANGLE, color, format(len(contours))) # TODO: object recognition
+	# sayISee(Shape.TRIANGLE, Color.RED, 2)
+
 
 cv2.waitKey(0)
 sys.exit(0)
