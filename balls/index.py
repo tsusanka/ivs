@@ -16,8 +16,8 @@ for color in colors:
 	draw_contours(img_copy, contours)
 	cv2.imshow(color[2], img_copy)
 
-	# sayISee(Shape.TRIANGLE, color, format(len(contours))) # TODO: object recognition
-	# sayISee(Shape.TRIANGLE, Color.RED, 2)
+
+	sayISee(Shape.TRIANGLE, color[2], format(len(contours))) # TODO: object recognition
 
 
 cv2.waitKey(0)

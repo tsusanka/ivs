@@ -6,33 +6,34 @@ from enums import *
 if is_production():
     from naoqi import ALProxy
 
-def getISeeSentence(shape, color, count):    
+def getISeeSentence(shape, color, count):
+    count = int(count)
     if count == 0:
         return "Nic nevidím"
     sentence = "Vidím "
     if count == 1:
-        sentence = "jeden"
+        sentence += "jeden"
     elif count == 2:
-        sentence = "dva"
+        sentence += "dva"
     else:
-        sentence = str(count)
+        sentence += str(count)
     sentence += " "
 
-    if color == Color.BLUE:
+    if color == "blue":
         if count > 4:
             sentence += "modrých"
         elif count > 1:
             sentence += "modré"
         elif count == 1:
             sentence += "modrý"
-    if color == Color.YELLOW:
+    if color == "yellow":
         if count > 4:
             sentence += "žlutých"
         elif count > 1:
             sentence += "žluté"
         elif count == 1:
             sentence += "žlutý"
-    if color == Color.RED:
+    if color == "red":
         if count > 4:
             sentence += "červených"
         elif count == 1:
@@ -60,8 +61,6 @@ def getISeeSentence(shape, color, count):
 
 def sayISee(shape, color, count):
     sentence = getISeeSentence(shape, color, count)
-    print (sentence)
-    return;
     if is_production():
         tts = ALProxy("ALTextToSpeech", ROBOT_IP, 9559)
         tts.setLanguage("Czech")
