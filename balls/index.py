@@ -4,10 +4,11 @@ import cv2
 import sys
 from pre_processing import *
 from speech import *
+from shapes import *
 
-img = cv2.imread('color_balls4.jpg')
+img = cv2.imread('shapes-byr.png')
 
-colors = [Color.BLUE, Color.YELLOW, Color.RED]
+colors = [Color.YELLOW] # for testing, later add: Color.BLUE, Color.RED,
 for color in colors:
 	pre_processed = pre_process(img, color)
 	contours = find_contours(pre_processed)
@@ -17,7 +18,11 @@ for color in colors:
 	cv2.imshow(color[2], img_copy)
 
 
-	sayISee(Shape.TRIANGLE, color[2], format(len(contours))) # TODO: object recognition
+	squares = find_squares(contours)
+	cv2.drawContours( img, squares, -1, (0, 255, 0), 3 )
+	cv2.imshow('squares', img)
+
+	# sayISee(Shape.TRIANGLE, color[2], format(len(contours))) # TODO: object recognition
 
 
 cv2.waitKey(0)
