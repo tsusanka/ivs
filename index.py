@@ -1,11 +1,12 @@
 
-import numpy as np
 import cv2
 import sys
 from pre_processing import *
 from speech import *
 from shapes import *
 from enums import *
+from config import *
+from nao_controller import *
 
 img = cv2.imread('assets/shapes-basic.png')
 
