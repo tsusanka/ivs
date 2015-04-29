@@ -1,4 +1,3 @@
-
 import numpy as np
 import cv2
 import sys
@@ -31,12 +30,15 @@ def draw_hough_circles(image, circles):
 	    cv2.circle(image,(i[0],i[1]),2,(0,0,255),3)
 
 def pre_process(image, color):
-	img = cv2.medianBlur(image, 5)
-	hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+	ranged_img = extract_color(image, color)
+	erode = cv2.erode(ranged_img, None, iterations = 3)
+	dilate = cv2.dilate(erode, None, iterations = 10)
+	return dilate
+
+def extract_color(image, color):
+	hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 	ranged_img = cv2.inRange(hsv, color[0], color[1])
 	if color[2] == 'red':
 		second_range = cv2.inRange(hsv, color[3], color[4])
 		cv2.add(ranged_img, second_range, ranged_img)
-	erode = cv2.erode(ranged_img, None, iterations = 3)
-	dilate = cv2.dilate(erode, None, iterations = 10)
-	return dilate
+	return ranged_img
