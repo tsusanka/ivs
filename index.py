@@ -8,13 +8,13 @@ from enums import *
 from config import *
 from nao_controller import *
 
-img = cv2.imread('assets/shapes-basic.png')
+img = cv2.imread('assets/shapes-byr.png')
 
-colors = [Color.YELLOW] # for testing, later add: Color.BLUE, Color.RED,
+colors = [Color.YELLOW, Color.BLUE, Color.RED]
 for color in colors:
-	pre_processed = pre_process(img, color)
+	pre_processed = extract_color(img, color)
 	contours = find_contours(pre_processed)
-	
+
 	img_copy = img.copy()
 	draw_contours(img_copy, contours)
 	cv2.imshow(color[2], img_copy)

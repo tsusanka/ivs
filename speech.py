@@ -50,7 +50,7 @@ def getISeeSentence(shape, color, count):
     if shape == Shape.RECTANGLE:
         sentence += "obdelník"
     if shape == Shape.CIRCLE:
-        sentence += "trojúhelník"
+        sentence += "kruh"
 
     if count > 4:
         sentence += "ů"
