@@ -5,8 +5,9 @@ import sys
 from pre_processing import *
 from speech import *
 from shapes import *
+from enums import *
 
-img = cv2.imread('assets/shapes-byr.png')
+img = cv2.imread('assets/shapes-basic.png')
 
 colors = [Color.YELLOW] # for testing, later add: Color.BLUE, Color.RED,
 for color in colors:
@@ -17,12 +18,16 @@ for color in colors:
 	draw_contours(img_copy, contours)
 	cv2.imshow(color[2], img_copy)
 
+	shapes = find_shapes(contours)
 
-	squares = find_squares(contours)
-	cv2.drawContours( img, squares, -1, (0, 255, 0), 3 )
-	cv2.imshow('squares', img)
-
-	# sayISee(Shape.TRIANGLE, color[2], format(len(contours))) # TODO: object recognition
+	for key, shape in shapes.iteritems():
+		if not shape:
+			continue
+		for contours in shape:
+			cv2.drawContours( img, shape, -1, (0, 255, 0), 3 )
+		sayISee(key, color[2], format(len(shape))) # TODO: object recognition
+	
+	cv2.imshow('shapes', img)
 
 
 cv2.waitKey(0)
