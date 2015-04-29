@@ -62,7 +62,7 @@ def getISeeSentence(shape, color, count):
 def sayISee(shape, color, count):
     sentence = getISeeSentence(shape, color, count)
     if is_production():
-        tts = ALProxy("ALTextToSpeech", ROBOT_IP, 9559)
+        tts = ALProxy("ALTextToSpeech", ROBOT_IP, ROBOT_PORT)
         tts.setLanguage("Czech")
         tts.say(sentence);
     else:
