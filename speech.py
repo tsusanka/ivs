@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from bootstrap import *
+from config import *
 from enums import *
 
 if is_production():

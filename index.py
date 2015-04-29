@@ -6,7 +6,7 @@ from pre_processing import *
 from speech import *
 from shapes import *
 
-img = cv2.imread('shapes-byr.png')
+img = cv2.imread('assets/shapes-byr.png')
 
 colors = [Color.YELLOW] # for testing, later add: Color.BLUE, Color.RED,
 for color in colors:
