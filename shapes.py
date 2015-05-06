@@ -1,6 +1,7 @@
 
 import numpy as np
 import cv2
+import math
 from pre_processing import *
 from enums import *
 
@@ -16,7 +17,8 @@ def find_shapes(contours):
 	shapes[Shape.CIRCLE] = []
 	for contour in contours:
 		approx = cv2.approxPolyDP(contour, cv2.arcLength(contour, True)*0.02, True);
-		if len(approx) == 4 and cv2.contourArea(approx) > 1000 and cv2.isContourConvex(approx):
+		area = cv2.contourArea(approx)
+		if len(approx) == 4 and area > 1000 and cv2.isContourConvex(approx):
 
 			# some magic to detect if the angles are ~90 degrees
 			approx = approx.reshape(-1,2)
@@ -26,5 +28,11 @@ def find_shapes(contours):
 				shapes[Shape.RECTANGLE].append(approx)
 		if len(approx) == 3 and cv2.isContourConvex(approx):
 			shapes[Shape.TRIANGLE].append(approx)
+		else:
+			x,y, width, height = cv2.boundingRect(contour)
+			radius = width / 2
+
+			if abs(1 - (width / height)) <= 0.2 and abs(1 - (area / (math.pi * math.pow(radius, 2)))) <= 0.2:
+				shapes[Shape.CIRCLE].append(contour)
 
 	return shapes
