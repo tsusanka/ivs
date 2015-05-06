@@ -33,7 +33,7 @@ def get_image_from_camera(IP, PORT):
 	# Create a PIL Image from our pixel array.
 	#im = Image.fromstring("RGB", (imageWidth, imageHeight), array)
 
-	Save the image.
+	# Save the image.
 	im.save("camImage.png", "PNG")
 	im.show()
 
