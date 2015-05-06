@@ -1,11 +1,7 @@
 import sys
 import time
-
-<<<<<<< HEAD
 import numpy
 
-=======
->>>>>>> 04d02bfc0a7f23e40400efaedf3595d5d91d2a3c
 from naoqi import ALProxy
 
 def get_image_from_camera(IP, PORT):
@@ -37,9 +33,9 @@ def get_image_from_camera(IP, PORT):
 	# Create a PIL Image from our pixel array.
 	#im = Image.fromstring("RGB", (imageWidth, imageHeight), array)
 
-  Save the image.
-  im.save("camImage.png", "PNG")
-  im.show()
+	Save the image.
+	im.save("camImage.png", "PNG")
+	im.show()
 
 
 	# via http://stackoverflow.com/questions/14134892/convert-image-from-pil-to-opencv-format
