@@ -6,7 +6,6 @@ from speech import *
 from shapes import *
 from enums import *
 from config import *
-from nao_controller import *
 
 img = cv2.imread('assets/shapes-byr.png')
 
