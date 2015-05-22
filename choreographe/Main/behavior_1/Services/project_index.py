@@ -13,7 +13,8 @@ def projectMain():
     found = False
     colors = [Color.YELLOW, Color.BLUE, Color.RED]
     for color in colors:
-        pre_processed = extract_color(img, color)
+        pre_processed = pre_process(img, color)
+        #pre_processed = extract_color(img, color)
         contours = find_contours(pre_processed)
     
         img_copy = img.copy()
