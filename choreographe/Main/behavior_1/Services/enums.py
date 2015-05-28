@@ -23,3 +23,4 @@ class Shape:
     RECTANGLE = 2
     HEXAGON = 3
     CIRCLE = 4
+    PENTAGON = 5

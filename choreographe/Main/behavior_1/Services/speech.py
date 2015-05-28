@@ -44,11 +44,13 @@ def getISeeSentence(shape, color, count):
     if shape == Shape.TRIANGLE:
         sentence += "trojúhelník"
     if shape == Shape.HEXAGON:
-        sentence += "hexagon"
+        sentence += "šestiúhelník"
     if shape == Shape.RECTANGLE:
         sentence += "obdelník"
     if shape == Shape.CIRCLE:
         sentence += "kruh"
+    if shape == Shape.PENTAGON:
+        sentence += "pětiúhelník"
 
     if count > 4:
         sentence += "ů"
