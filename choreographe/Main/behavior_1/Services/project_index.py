@@ -8,7 +8,7 @@ from config import *
 from camera_controller import *
 
 def projectMain():
-    img = get_image_from_camera(ROBOT_IP, ROBOT_PORT)
+    img = cv2.imread('assets/resize6.png')
 
     found = False
     colors = [Color.YELLOW, Color.BLUE, Color.RED]
@@ -19,6 +19,7 @@ def projectMain():
     
         img_copy = img.copy()
         draw_contours(img_copy, contours)
+        cv2.imshow(color[2], img_copy)
     
         shapes = find_shapes(contours)
 
@@ -27,8 +28,11 @@ def projectMain():
                 continue;
             for contours in shape:
                 cv2.drawContours( img, shape, -1, (0, 255, 0), 3 )
-            sayISee(key, color[2], format(len(shape))) # TODO: object recognition
+            printISee(key, color[2], format(len(shape))) # TODO: object recognition
             found = True
-            
+
     if not found:
-        sayISee(0, 0, 0)
+        printISee(0, 0, 0)
+    
+    cv2.waitKey(0)
+    sys.exit(0)

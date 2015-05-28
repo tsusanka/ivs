@@ -3,7 +3,6 @@ import time
 import numpy
 from PIL import Image
 
-from naoqi import ALProxy
 
 def get_image_from_camera(IP, PORT):
     camProxy = ALProxy("ALVideoDevice", IP, PORT)

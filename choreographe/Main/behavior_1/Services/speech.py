@@ -2,7 +2,6 @@
 
 from config import *
 from enums import *
-from naoqi import ALProxy
 
 def getISeeSentence(shape, color, count):
     count = int(count)
