@@ -17,7 +17,7 @@ def find_shapes(contours):
     shapes[Shape.PENTAGON] = []
     shapes[Shape.CIRCLE] = []
     for contour in contours:
-        approx = cv2.approxPolyDP(contour, cv2.arcLength(contour, True)*0.02, True);
+        approx = cv2.approxPolyDP(contour, cv2.arcLength(contour, True)*0.04, True);
         area = cv2.contourArea(approx)
 
         # Skip small or non-convex objects
@@ -41,11 +41,11 @@ def find_shapes(contours):
         elif len(approx) == 6:
             shapes[Shape.HEXAGON].append(approx)
 
-        elif len(approx) > 7:
-            x,y, width, height = cv2.boundingRect(contour)
-            radius = width / 2
+        elif len(approx) >= 7:
+            # x,y, width, height = cv2.boundingRect(contour)
+            # radius = width / 2
 
-            if abs(1 - (width / height)) <= 0.2 and abs(1 - (area / (math.pi * math.pow(radius, 2)))) <= 0.2:
-                shapes[Shape.CIRCLE].append(contour)
+            # if abs(1 - (width / height)) <= 0.2 and abs(1 - (area / (math.pi * math.pow(radius, 2)))) <= 0.2:
+            shapes[Shape.CIRCLE].append(contour)
 
     return shapes
